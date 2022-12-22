@@ -1,7 +1,6 @@
 // ESModules = imports and exports
 // CommonJs = require -> Deprecated
 import express, { Request, Response } from 'express';
-
 import diariesRoutes from './routes/diaries';
 
 const app = express();
