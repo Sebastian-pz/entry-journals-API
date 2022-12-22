@@ -6,10 +6,6 @@ import diaryEntries from './diariesData.json';
 // Se hace necesario la acerción de tipos (as ****)
 const diaries: DiaryEntry[] = diaryEntries as DiaryEntry[];
 
-export function hola() {
-  return 'Hola mundo';
-}
-
 export const getEntries = (): DiaryEntry[] => {
   return diaries;
 };
