@@ -10,7 +10,11 @@ router.get('/', (_req, res) => {
 router.get('/:id', (req, res) => {
   const id = Number(req.params.id);
   const entry = diariesServices.getEntryById(id);
-  return res.status(200).send(entry ? entry : { response: 'Entry not found' });
+  if (entry) {
+    const { comment, ...entryWithoutSensitive } = entry;
+    return res.status(200).send(entryWithoutSensitive);
+  }
+  return res.status(404).send({ response: 'Entry not found' });
 });
 
 router.post('/', (_req, res) => {
