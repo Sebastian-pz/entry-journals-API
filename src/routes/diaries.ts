@@ -21,14 +21,21 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   try {
     const newEntry = toNewDiaryEntry(req.body);
-
     diariesServices.addEntry(newEntry);
-
     return res.status(201).send({ response: 'Entry was created successful' });
   } catch (error) {
     console.log(error);
     return res.status(400).send({ response: 'Not success' });
   }
+});
+
+router.delete('/:id', (req, res) => {
+  const idToDelete = Number(req.params.id);
+  return diariesServices.deleteEntry(idToDelete)
+    ? res.status(202).send({ response: 'Object deleted' })
+    : res
+        .status(204)
+        .send({ response: 'There is not an element with this id' });
 });
 
 export default router;

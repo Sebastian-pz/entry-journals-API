@@ -4,7 +4,7 @@ import { DiaryEntry, DiaryEntryNoID, DiaryEntryNoSensitive } from '../types';
 import diaryEntries from './diariesData.json';
 
 // Se hace necesario la acerción de tipos (as ****)
-const diaries: DiaryEntry[] = diaryEntries as DiaryEntry[];
+let diaries: DiaryEntry[] = diaryEntries as DiaryEntry[];
 
 export const getEntries = (): DiaryEntry[] => {
   return diaries;
@@ -38,4 +38,15 @@ export const addEntry = (entry: DiaryEntryNoID): DiaryEntry => {
   diaryEntries.push(newDiary);
   //
   return newDiary;
+};
+
+export const deleteEntry = (id: number): boolean => {
+  const initialLength = diaries.length;
+  diaries = diaries.filter((diary) => diary.id !== id);
+
+  if (initialLength !== diaries.length) {
+    return true;
+  }
+
+  return false;
 };
