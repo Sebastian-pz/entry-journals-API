@@ -20,5 +20,5 @@ app.get('/ping', (_req: Request, res: Response) => {
 app.use('/api/diaries', diariesRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+  console.log(`Server listening on port ${PORT} 🎄`);
 });
