@@ -38,4 +38,18 @@ router.delete('/:id', (req, res) => {
         .send({ response: 'There is not an element with this id' });
 });
 
+router.put('/:id', (req, res) => {
+  const idToUpdate = Number(req.params.id);
+  const { weather, visibility, comment } = req.body;
+  const newData = {
+    weather,
+    visibility,
+    comment,
+  };
+
+  return diariesServices.updateEntry(idToUpdate, newData)
+    ? res.status(200).send({ response: 'Success' })
+    : res.status(204).send({ response: 'Not updated' });
+});
+
 export default router;

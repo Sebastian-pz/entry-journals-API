@@ -1,6 +1,11 @@
 // Se utiliza con la finalidad de abstraer
 // la mayor cantidad de lógica posible de las rutas
-import { DiaryEntry, DiaryEntryNoID, DiaryEntryNoSensitive } from '../types';
+import {
+  DiaryEntry,
+  DiaryEntryNewData,
+  DiaryEntryNoID,
+  DiaryEntryNoSensitive,
+} from '../types';
 import diaryEntries from './diariesData.json';
 
 // Se hace necesario la acerción de tipos (as ****)
@@ -49,4 +54,20 @@ export const deleteEntry = (id: number): boolean => {
   }
 
   return false;
+};
+
+export const updateEntry = (
+  id: number,
+  newData: DiaryEntryNewData
+): boolean => {
+  const entryToUpdate = diaries.find((diary) => diary.id === id);
+  if (!entryToUpdate) {
+    return false;
+  }
+
+  entryToUpdate.comment = newData.comment;
+  entryToUpdate.weather = newData.weather;
+  entryToUpdate.visibility = newData.visibility;
+
+  return true;
 };
