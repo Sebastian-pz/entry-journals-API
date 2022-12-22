@@ -10,6 +10,12 @@ export const getEntries = (): DiaryEntry[] => {
   return diaries;
 };
 
+export const getEntryById = (id: number): DiaryEntry | undefined => {
+  return diaries.find((diary) => {
+    return diary.id == id;
+  });
+};
+
 // Retusns without sensitive info
 export const getEntriesWithoutSensitiveInfo = (): DiaryEntryNoSensitive[] => {
   return diaries.map(({ id, date, weather, visibility }) => {
