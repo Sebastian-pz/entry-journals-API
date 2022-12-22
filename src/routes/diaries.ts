@@ -17,8 +17,18 @@ router.get('/:id', (req, res) => {
   return res.status(404).send({ response: 'Entry not found' });
 });
 
-router.post('/', (_req, res) => {
-  res.send('Creating a diary!');
+router.post('/', (req, res) => {
+  const { weather, visibility, comment } = req.body;
+  const newEntry = {
+    date: new Date().toISOString().slice(0, 10),
+    weather,
+    visibility,
+    comment,
+  };
+
+  diariesServices.addEntry(newEntry);
+
+  return res.status(201).send({ response: 'Entry was created successful' });
 });
 
 export default router;

@@ -1,6 +1,6 @@
 // Se utiliza con la finalidad de abstraer
 // la mayor cantidad de lógica posible de las rutas
-import { DiaryEntry, DiaryEntryNoSensitive } from '../types';
+import { DiaryEntry, DiaryEntryNoID, DiaryEntryNoSensitive } from '../types';
 import diaryEntries from './diariesData.json';
 
 // Se hace necesario la acerción de tipos (as ****)
@@ -28,6 +28,14 @@ export const getEntriesWithoutSensitiveInfo = (): DiaryEntryNoSensitive[] => {
   });
 };
 
-export const addEntry = (): undefined => {
-  return undefined;
+export const addEntry = (entry: DiaryEntryNoID): DiaryEntry => {
+  const newDiary = {
+    id: Math.max(...diaryEntries.map((num) => num.id)) + 1,
+    ...entry,
+  };
+
+  // This part -> try catch block
+  diaryEntries.push(newDiary);
+  //
+  return newDiary;
 };

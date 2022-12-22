@@ -11,6 +11,7 @@ export interface DiaryEntry {
 }
 
 export type DiaryEntryNoSensitive = Omit<DiaryEntry, 'comment'>;
+export type DiaryEntryNoID = Omit<DiaryEntry, 'id'>;
 
 // Una interfaz está pensada para ser extendible (como herencia)
 // interface extendedInterface extends DiaryEntry {
