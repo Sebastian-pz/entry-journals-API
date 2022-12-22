@@ -14,8 +14,16 @@ export const getEntries = (): DiaryEntry[] => {
   return diaries;
 };
 
+// Retusns without sensitive info
 export const getEntriesWithoutSensitiveInfo = (): DiaryEntryNoSensitive[] => {
-  return diaries;
+  return diaries.map(({ id, date, weather, visibility }) => {
+    return {
+      id,
+      date,
+      weather,
+      visibility,
+    };
+  });
 };
 
 export const addEntry = (): undefined => {

@@ -4,8 +4,7 @@ import * as diariesServices from '../services/diaries';
 const router = express.Router();
 
 router.get('/', (_req, res) => {
-  res.status(200).send(diariesServices.getEntries());
-  return;
+  return res.status(200).send(diariesServices.getEntriesWithoutSensitiveInfo());
 });
 
 router.post('/', (_req, res) => {
