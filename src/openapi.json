@@ -1,0 +1,183 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API Documentation",
+    "description": "This documentation is about API endpoints",
+    "contact": {
+      "email": "spezuluaga@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Entry",
+      "description": "Everything about your entries"
+    }
+  ],
+  "paths": {
+    "/api/diaries": {
+      "put": {
+        "tags": ["diaries"],
+        "summary": "Update an existing entry",
+        "description": "Update an existing entry by Id",
+        "operationId": "updateEntry",
+        "requestBody": {
+          "description": "Update an existent entry",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Entry"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "post": {
+        "tags": ["diaries"],
+        "summary": "Add a new entry",
+        "description": "Add a new entry to our data",
+        "operationId": "addPet",
+        "requestBody": {
+          "description": "Create a new entry",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Entry"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "response": "Entry was created successful"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "response": "Not success"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["diaries"],
+        "summary": "Find all diaries",
+        "description": "Get all diaries in our data",
+        "operationId": "getEntriesWithOutSensitiveInfo",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Entry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["diaries"],
+        "summary": "Deletes a entry",
+        "description": "delete a entry",
+        "operationId": "deleteEntry",
+        "parameters": [
+          {
+            "name": "entryId",
+            "in": "path",
+            "description": "Entry id to delete",
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Object deleted"
+          },
+          "204": {
+            "description": "There is not an element with this id"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Entry": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "int64",
+            "example": 10
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-01-01"
+          },
+          "weather": {
+            "type": "string",
+            "example": "rainy",
+            "description": "weather status",
+            "enum": ["rainy", "sunny", "windy", "cloud", "stormy"]
+          },
+          "visibility": {
+            "type": "string",
+            "description": "visibility Status",
+            "example": "poor",
+            "enum": ["great", "good", "ok", "poor"]
+          },
+          "comment": {
+            "type": "string",
+            "description": "description about weather status",
+            "example": "Flights shouldn't take off in this weather"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "Pet": {
+        "description": "Pet object that needs to be added to the store",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Entry"
+            }
+          }
+        }
+      }
+    }
+  }
+}
