@@ -21,34 +21,24 @@
   ],
   "paths": {
     "/api/diaries": {
-      "put": {
+      "get": {
         "tags": ["diaries"],
-        "summary": "Update an existing entry",
-        "description": "Update an existing entry by Id",
-        "operationId": "updateEntry",
-        "requestBody": {
-          "description": "Update an existent entry",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Entry"
-              }
-            }
-          },
-          "required": true
-        },
+        "summary": "Find all diaries",
+        "description": "Get all diaries in our data",
+        "operationId": "getEntriesWithOutSensitiveInfo",
         "responses": {
           "200": {
-            "description": "Successful operation"
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Pet not found"
-          },
-          "405": {
-            "description": "Validation exception"
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Entry"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -86,39 +76,65 @@
             }
           }
         }
-      },
-      "get": {
+      }
+    },
+    "/api/diaries/{entryID}": {
+      "put": {
         "tags": ["diaries"],
-        "summary": "Find all diaries",
-        "description": "Get all diaries in our data",
-        "operationId": "getEntriesWithOutSensitiveInfo",
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Entry"
-                  }
-                }
+        "summary": "Update an existing entry",
+        "description": "Update an existing entry by Id",
+        "operationId": "updateEntryByID",
+        "parameters": [
+          {
+            "name": "entryId",
+            "in": "path",
+            "description": "ID of entry to update",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent entry",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Entry"
               }
             }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
           }
         }
       },
       "delete": {
         "tags": ["diaries"],
-        "summary": "Deletes a entry",
-        "description": "delete a entry",
+        "summary": "Deletes an entry",
+        "description": "delete an entry",
         "operationId": "deleteEntry",
         "parameters": [
           {
             "name": "entryId",
             "in": "path",
-            "description": "Entry id to delete",
-            "required": true
+            "description": "ID of entry to update",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
           }
         ],
         "responses": {
@@ -137,16 +153,6 @@
       "Entry": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "number",
-            "format": "int64",
-            "example": 10
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2017-01-01"
-          },
           "weather": {
             "type": "string",
             "example": "rainy",
