@@ -4,7 +4,7 @@ This project is about an API that helps to see climate changes over time.
 
 ## How to run
 
-The project is in "TypeScript" - "Express"
+TypeScript - Express project
 
 1. You need to download the repository
 2. In the terminal, you need to run the following commands:
@@ -13,7 +13,7 @@ The project is in "TypeScript" - "Express"
 
    2.2 `npm run dev` to run the local server and observe the changes
 
-   2.3 You can use other scripts like `npm run tsc` to compile TypeScript to JavaScript files in the build folder
+   2.3 You can use other scripts like `npm run tsc` to compile TypeScript to JavaScript files in the build folder and then run `npm start` or `node index.js` in build folder
 
 3. Access to `http://localhost:3000`
 
